@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     )
     db_pool_size: int = Field(default=5, ge=1, le=20)
     db_max_overflow: int = Field(default=5, ge=0, le=20)
+    embedding_dimension: int = Field(default=384, ge=64, le=4096)
 
 
 @lru_cache(maxsize=1)
