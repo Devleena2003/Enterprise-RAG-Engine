@@ -12,7 +12,6 @@ services:
     volumes:
       - rag_pgdata:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d:ro
-    # Constrained memory settings for 8GB host systems
     command:
       - "postgres"
       - "-c"
@@ -35,5 +34,26 @@ services:
       timeout: 5s
       retries: 10
 
+  api:
+    build: .
+    container_name: rag_api
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-rag_user}:${POSTGRES_PASSWORD:-rag_password}@postgres:5432/${POSTGRES_DB:-rag_db}
+    ports:
+      - "8000:8000"
+    volumes:
+      - rag_model_cache:/home/appuser/.cache
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
+
 volumes:
   rag_pgdata:
+  rag_model_cache:
