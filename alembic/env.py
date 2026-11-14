@@ -1,11 +1,11 @@
 from logging.config import fileConfig
 
-from alembic import context
 from sqlalchemy import engine_from_config, pool
 
+import rag_engine.db.models  # noqa: F401 - register models on Base.metadata
+from alembic import context
 from rag_engine.config import get_settings
 from rag_engine.db.base import Base
-import rag_engine.db.models  # noqa: F401 - register models on Base.metadata
 
 config = context.config
 

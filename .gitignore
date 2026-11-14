@@ -16,3 +16,7 @@ build/
 # Local Data & Logs
 *.log
 pgdata/
+
+# Inspection outputs & local confidential test PDFs
+sample_data/output/
+sample_data/*.pdf

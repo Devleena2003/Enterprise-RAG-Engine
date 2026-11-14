@@ -23,7 +23,9 @@ class Settings(BaseSettings):
     db_pool_size: int = Field(default=5, ge=1, le=20)
     db_max_overflow: int = Field(default=5, ge=0, le=20)
     embedding_dimension: int = Field(default=384, ge=64, le=4096)
-
+    chunk_size: int = Field(default=1000, ge=200, le=4000)
+    chunk_overlap: int = Field(default=150, ge=0, le=1000)
+    min_extracted_chars: int = Field(default=30, ge=1)
 
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:

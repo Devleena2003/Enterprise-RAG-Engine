@@ -1,4 +1,5 @@
 import uuid
+
 from sqlalchemy import text
 
 from rag_engine.db.models import Document, DocumentChunk

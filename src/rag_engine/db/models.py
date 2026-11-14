@@ -1,5 +1,5 @@
-from datetime import datetime, timezone
 import uuid
+from datetime import datetime, timezone
 from typing import Any
 
 from pgvector.sqlalchemy import Vector
